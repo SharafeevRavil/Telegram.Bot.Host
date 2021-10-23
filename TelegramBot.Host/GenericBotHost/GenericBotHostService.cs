@@ -79,7 +79,7 @@ namespace TelegramBot.Host.GenericBotHost
 
                 application = builder.Build();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (!Options.BotHostOptions.CaptureStartupErrors)
                     throw;

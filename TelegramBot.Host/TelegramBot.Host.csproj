@@ -4,32 +4,26 @@
         <TargetFramework>net5.0</TargetFramework>
         <Title>TelegramBot.Host</Title>
         <Authors>Sharafeev Ravil</Authors>
-        <Description>Adaptation of ASP.NET Core 5 for TelegramBot
-Supports:
-* Startups
-* Middlewares
-* Controllers (CommandHandlers, e.g. /start command handler)</Description>
         <Copyright>Copyright (c) Sharafeev Ravil 2021</Copyright>
         <PackageProjectUrl>https://github.com/SharafeevRavil/TelegramBot.Host</PackageProjectUrl>
         <RepositoryUrl>https://github.com/SharafeevRavil/TelegramBot.Host</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>Telegram TelegramBot TelegramBot.Host</PackageTags>
         <PackageIcon>icon.png</PackageIcon>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0-rc.2.21480.5" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0-rc.2.21480.5" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0-rc.2.21480.5" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.2.21480.5" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0-rc.2.21480.5" />
-        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.0-rc.2.21480.10" />
-        <PackageReference Include="Telegram.Bot" Version="17.0.0-alpha.3" />
-        <PackageReference Include="Telegram.Bot.Extensions.Polling" Version="1.0.0-alpha.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+        <PackageReference Include="Telegram.Bot" Version="16.0.2" />
+        <PackageReference Include="Telegram.Bot.Extensions.Polling" Version="0.2.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="icon.png" Pack="true" PackagePath="" />
+        <None Include="../LICENSE.txt" Pack="true" PackagePath="" />
+        <None Include="../README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>
