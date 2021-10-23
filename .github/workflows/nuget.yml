@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+jobs:
+  nuget-org-publish:
+    runs-on: ubuntu-latest
+    name: Update NuGet package on NuGet.org
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+        
+      - name: Build solution and generate NuGet package
+        run: |  
+          dotnet pack -c Release -o out  
+      
+      - name: Push generated package to NuGet registry
+        run: dotnet nuget push ./out/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+  
+  github-packages-publish:
+    runs-on: ubuntu-latest
+    name: Update NuGet package on GitHub
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Setup .NET Core @ Latest
+        uses: actions/setup-dotnet@v1
+        with:
+          source-url: https://nuget.pkg.github.com/SharafeevRavil/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}        
+          
+      - name: Build solution and generate NuGet package
+        run: |  
+          dotnet pack -c Release -o out  
+      - name: Push generated package to GitHub registry
+        run: dotnet nuget push ./out/*.nupkg --skip-duplicate --no-symbols true
