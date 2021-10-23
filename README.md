@@ -1,4 +1,4 @@
-Adaptation of ASP.NET Core 5 for TelegramBot
+Adaptation of ASP.NET Core 5 for Telegram.Bot
 
 Supports:
 * Startups
