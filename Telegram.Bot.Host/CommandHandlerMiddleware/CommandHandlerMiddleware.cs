@@ -27,14 +27,14 @@ namespace Telegram.Bot.Host.CommandHandlerMiddleware
             _next = next;
         }
 
-        public async Task InvokeAsync(BotUpdateContext botUpdateContext, CommandHandlersStorage handlersStorage)
+        public async Task InvokeAsync(BotUpdateContext botUpdateContext, CommandHandlersStorage handlersStorage, ICommandNotFoundHandler commandNotFoundHandler)
         {
             var command = botUpdateContext.Update.Message?.Text?.ToLower();
             if (command == null)
                 command = botUpdateContext.Update.CallbackQuery.Data;
             if (!handlersStorage.CommandHandlerTypes.ContainsKey(command!))
             {
-                await CommandNotFoundHandler.CommandNotFound(botUpdateContext);
+                await commandNotFoundHandler.HandleAsync(botUpdateContext);
                 return;
             }
 
