@@ -39,6 +39,8 @@ namespace Telegram.Bot.Host.BotServer
 
         private CancellationTokenSource _cancellationTokenSource;
 
+        public TelegramBotClient BotClient { get; private set; }
+
         public BotServer(IOptions<TelegramOptions> telegramOptions)
         {
             _telegramOptions = telegramOptions.Value;
@@ -47,11 +49,11 @@ namespace Telegram.Bot.Host.BotServer
         public Task StartAsync<TContext>(IBotApplication<TContext> application, CancellationToken cancellationToken)
             where TContext : notnull
         {
-            var botClient = new TelegramBotClient(_telegramOptions.Token);
+            BotClient = new TelegramBotClient(_telegramOptions.Token);
 
             _cancellationTokenSource = new CancellationTokenSource();
             var updateHandler = new UpdateHandler<TContext>(application);
-            botClient.StartReceiving(
+            BotClient.StartReceiving(
                 new DefaultUpdateHandler(updateHandler.HandleUpdateAsync, ErrorHandler.HandleErrorAsync),
                 cancellationToken: cancellationToken);
 
