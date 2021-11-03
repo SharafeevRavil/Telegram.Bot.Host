@@ -30,7 +30,8 @@ namespace Telegram.Bot.Host.CommandHandlerMiddleware
         public async Task InvokeAsync(BotUpdateContext botUpdateContext, CommandHandlersStorage handlersStorage)
         {
             var command = botUpdateContext.Update.Message?.Text?.ToLower();
-
+            if (command == null)
+                command = botUpdateContext.Update.CallbackQuery.Data;
             if (!handlersStorage.CommandHandlerTypes.ContainsKey(command!))
             {
                 await CommandNotFoundHandler.CommandNotFound(botUpdateContext);
