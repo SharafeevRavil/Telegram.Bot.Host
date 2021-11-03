@@ -29,7 +29,13 @@ namespace Telegram.Bot.Host.BotServer
     {
         public static IBotHostBuilder UseBotServer(this IBotHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(services => { services.AddSingleton<IServer, BotServer>(); });
+            return hostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton<IServer, BotServer>();
+                services.AddSingleton<ITelegramBotClient, TelegramBotClient>(provider =>
+                    ((BotServer)provider.GetService<IServer>())!.BotClient
+                );
+            });
         }
     }
 
